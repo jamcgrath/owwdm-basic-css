@@ -1,0 +1,613 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<title>CSS Basics & More for OWDDM</title>
+
+	<link rel="stylesheet" href="css/reveal.css">
+	<link rel="stylesheet" href="css/theme/black.css">
+
+	<!-- Theme used for syntax highlighting of code -->
+	<link rel="stylesheet" href="lib/css/zenburn.css">
+
+	<!-- Printing and PDF exports -->
+	<script>
+		var link = document.createElement('link');
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+		document.getElementsByTagName('head')[0].appendChild(link);
+	</script>
+
+	<style>
+		.reveal ul>li {
+			list-style: none;
+			line-height: 1.5;
+			margin-bottom: .5em;
+		}
+
+		.reveal h2#standard-box-model~ol {
+			display: inherit;
+			margin-left: 190px;
+		}
+
+		span.orange {
+			color: orange;
+		}
+
+		span.green {
+			color: green;
+		}
+
+		span.red {
+			color: red;
+		}
+	</style>
+
+</head>
+
+<body>
+	<div class="reveal">
+		<div class="slides">
+			<section data-markdown>
+				<textarea data-template>
+					# James McGrath
+					Front End Development
+
+					HTML, CSS, JS (Vue, React)
+
+					Currently I'm building something awesome in Vue!
+
+				</textarea>
+			</section>
+			<section data-markdown>
+				<textarea data-template>
+					* CSS Basics
+					* Cascade
+					* Inheritance
+					* Box Model
+					</textarea>
+			</section>
+			<section>
+				<section data-markdown>
+					<textarea data-template>
+						## CSS Basics
+						CSS 101!
+					</textarea>
+				</section>
+				<section data-markdown>
+					<textarea data-template>
+						## What is CSS
+						* CSS = Cascading Style Sheets
+						* A language for specifying how a document will be presented to the user
+					</textarea>
+				</section>
+				<section>
+					<h2>CSS Syntax</h2>
+					<span class="fragment fade-in orange" data-fragment-index="1">selector </span>
+					<span class="fragment fade-in" data-fragment-index="2">{ </span>
+					<span class="fragment fade-in green" data-fragment-index="3">property : </span>
+					<span class="fragment fade-in red" data-fragment-index="4">value; </span>
+					<span class="fragment fade-in" data-fragment-index="2">} </span>
+					<ul style="margin-top: 1em">
+						<li class="fragment fade-in" data-fragment-index="1">Selector = element, class, id, attribute</li>
+						<li class="fragment fade-in" data-fragment-index="3">
+							There are over 300 different properties in CSS
+							<ul>
+								<li><em>If a property is unknown or if a value is not valid for a given property, the declaration is ignored</em></li>
+							</ul>
+						</li>
+						<li class="fragment fade-in" data-fragment-index="4">
+							Each property has a specific list of valid values defined for it
+						</li>
+					</ul>
+				</section>
+				<section>
+					<aside class="notes" data-markdown>
+						<textarea data-template>
+							* h1 = element
+							* #nav = id
+							* yolo = invalid property
+							* .paragraph = class
+							* [data-yolo] = attribute
+							* .paragraph.green > span = combinator group
+						</textarea>
+					</aside>
+					<div data-markdown>
+						<textarea data-template>
+							## CSS Example
+							```CSS
+							/* <h1>...</h1> */
+							h1 {
+								color: red;
+							}
+							/* <div id="nav">...</div> */
+							#nav {
+								margin: 2em;
+								yolo: 100%; /* invalid property ignored */
+							}
+							```
+							</textarea>
+					</div>
+				</section>
+				<section>
+					<aside class="notes" data-markdown>
+						<textarea data-template>
+							* .paragraph = class
+							* [data-yolo] = attribute
+							* .paragraph.green > span = combinator group
+						</textarea>
+					</aside>
+					<div data-markdown>
+						<textarea data-template>
+							## CSS Example
+							```CSS
+							/* <p class="paragraph">...</p> */
+							.paragraph {
+								line-height: 1.5;
+								font-size: 16px
+							}
+							/* <p class="paragraph green" data-yolo >
+									<span class="alert">...</span>
+								</p>
+							*/
+							[data-yolo],
+							.paragraph.green > span.alert {
+								margin: 20px;
+							}
+							```
+							</textarea>
+					</div>
+				</section>
+				<section>
+					<h3>How to add CSS to a document</h3>
+					<ul>
+						<li class="fragment fade-in " data-fragment-index="1 ">External style sheet</li>
+						<li class="fragment fade-in " data-fragment-index="2 ">Embedded styles</li>
+						<li class="fragment fade-in " data-fragment-index="3 ">Inline styles</li>
+					</ul>
+					</textarea>
+				</section>
+				<section>
+					<aside class="notes" data-markdown>
+						<textarea data-template>
+							rel = relationship
+						</textarea>
+					</aside>
+					<div data-markdown>
+						<textarea data-template>
+								## External Style Sheet
+								```HTML
+								<head>
+									<meta charset="utf-8 ">
+									<title>CSS Example </title>
+									<!-- External style sheet -->
+									<link rel="stylesheet " href="./css/style.css ">
+								</head>
+								```
+						</textarea>
+					</div>
+				</section>
+				<section data-markdown>
+					<textarea data-template>
+						## Embedded Styles
+						```HTML
+						<head>
+							<meta charset="utf-8 ">
+							<title>CSS Example </title>
+							<style>
+								h1 {
+									color: blue;
+								}
+								p {
+									color: red;
+								}
+							</style>
+						</head>
+						```
+					</textarea>
+				</section>
+				<section data-markdown>
+					<textarea data-template>
+						## Inline Styles
+						```CSS
+						<body>
+							<!-- Inline Styles -->
+							<h1 style="color: blue; ">The Title is Blue</h1>
+							<p style="color: green; ">This paragraph is green</p>
+						</body>
+						```
+					</textarea>
+				</section>
+			</section>
+			<section>
+				<section data-markdown>
+					<textarea data-template>
+						## Cascade
+						Because you can't have CSS without the C!
+					</textarea>
+				</section>
+				<section>
+					<h2>What is the Cascade?</h2>
+					<blockquote class="fragment fade-in " data-fragment-index="1 ">
+						"The cascade takes a unordered list of declared values for a given property on a given element, sorts them by their declaration’s
+						precedence...and outputs a single cascaded value. "
+					</blockquote>
+					<em class="fragment fade-in " data-fragment-index="1 ">
+						<a href="https://www.w3.org/TR/css-cascade-4/#cascading ">CSS Cascading and Inheritance Level 4</a>
+					</em>
+				</section>
+				<section>
+					<h2>But what does that mean?</h2>
+					<p>In the simplest explanation, <strong>the order of rules matter</strong>
+						<span class="fragment fade-in " data-fragment-index="1 ">
+							but.... it's more complex than that.
+						</span>
+					</p>
+				</section>
+				<section>
+					<h3>What determines the winner of the cascade battle?</h3>
+					<ol>
+						<li class="fragment fade-in " data-fragment-index="1 ">Importance</li>
+						<li class="fragment fade-in " data-fragment-index="2 ">Specificity</li>
+						<li class="fragment fade-in " data-fragment-index="3 ">Source order</li>
+					</ol>
+					</textarea>
+				</section>
+				<section data-markdown>
+					<textarea data-template>
+						## How Importance Algorithm Works
+						1. The browser filters all the rules from all available sources that apply to an element.
+						2. Sort the rules by the order of importance and if the rule is followed by `!important`
+						</textarea>
+				</section>
+				<section>
+					<aside class="notes " data-markdown>
+						<textarea data-template>
+								* user agent = browser, has default styling
+								* user = the user sometimes the user will set styles for accessibility issues (font etc);
+								* author = the styles by devs
+								* CSS Animation not covered beyond the scope of this
+							</textarea>
+					</aside>
+					<div data-markdown>
+						<textarea data-template>
+							## Order of Importance Part 1
+							|   | Origin         | Importance    |
+							|---|----------------|---------------|
+							| 1 | <a href="https://motherfuckingwebsite.com" target="_blank">user agent</a>     | normal        |
+							| 2 | user           | normal        |
+							| 3 | author         | normal        |
+							| 4 | CSS animations | don't cascade*|
+							</textarea>
+					</div>
+				</section>
+				<section data-markdown>
+					<textarea data-template>
+						## !important
+						Adding !important to a rule will override all the other rules for that element
+						```CSS
+						p {
+							font-size: 2em !important;
+						}
+						```
+					</textarea>
+				</section>
+				<section data-markdown>
+					<textarea data-template>
+						## Order of Importance Part 2
+						|   | Origin         | Importance    |
+						|---|----------------|---------------|
+						| 1 | author         | !important    |
+						| 2 | user           | !important    |
+						| 3 | user agent     | !important    |
+					</textarea>
+				</section>
+				<section>
+					<aside class="notes " data-markdown>
+						<textarea data-template>
+							1. Declarations in user agent style sheets (e.g. the browser's default styles, used when no other styling is set).
+							2. Normal declarations in user style sheets (custom styles set by a user).
+							3. Normal declarations in author style sheets (these are the styles set by us, the web developers).
+							4. Important declarations in author style sheets
+							5. Important declarations in user style sheets
+						</textarea>
+					</aside>
+					<div data-markdown>
+						<textarea data-template>
+							## Order of Importance
+							|   | Origin         | Importance    |
+							|---|----------------|---------------|
+							| 1 | user agent     | normal        |
+							| 2 | user           | normal        |
+							| 3 | author         | normal        |
+							| 4 | CSS animations | don't cascade*|
+							| 5 | author         | !important    |
+							| 6 | user           | !important    |
+							| 7 | user agent     | !important    |
+						</textarea>
+					</div>
+				</section>
+				<section>
+					<h2>Importance Simplified</h2>
+					<span class="fragment fade-in " data-fragment-index="4 ">!important > </span>
+					<span class="fragment fade-in " data-fragment-index="3 ">author > </span>
+					<span class="fragment fade-in " data-fragment-index="2 ">user > </span>
+					<span class="fragment fade-in " data-fragment-index="1 ">user agent </span>
+				</section>
+				<section data-markdown>
+					<textarea data-template>
+						## Specificity
+						the hardest part of CSS
+					</textarea>
+				</section>
+				<section>
+					<h2>What Is Specificity?</h2>
+					<ul>
+						<li>A word I can't pronounce</li>
+						<li class="fragment fade-in " data-fragment-index="2 ">How browsers decide which CSS property values are the most relevant
+							to an element and, therefore, will be applied</li>
+					</ul>
+				</section>
+				<section data-markdown>
+					<textarea data-template>
+						## When Is Specificity Used?
+						> If you have two (or more) conflicting CSS rules that point to the same element, there are some basic rules that a browser follows to determine which one is most specific and therefore wins out.
+
+						[htmldog.com](http://www.htmldog.com/guides/css/intermediate/specificity/)
+					</textarea>
+				</section>
+				<section>
+					<h2>How To Calculate Specificity</h2>
+					<ul>
+						<li class="fragment fade-in " data-fragment-index="1 "> Give every inline style a value of 1000</li>
+						<li class="fragment fade-in " data-fragment-index="2 "> Give every ID selector a value of 100</li>
+						<li class="fragment fade-in " data-fragment-index="3 "> Give every class / attribute / pseudo-class selector a value
+							of 10</li>
+						<li class="fragment fade-in " data-fragment-index="4 "> Give every HTML/ pseudo-element selector a value of 1</li>
+						<li class="fragment fade-in " data-fragment-index="5 "> Add them all up to get a specificity value.</li>
+					</ul>
+					<p class="fragment fade-in " data-fragment-index="5 " style="font-size: .5em">
+						<i>Note: Universal selector (*), combinators (+, >, ~, ' ') and negation pseudo-class (:not) have no effect on specificity.</i>
+					</p>
+				</section>
+				<section data-markdown>
+					<textarea data-template>
+					## Let's visualize it
+					|Element | Thousands | Hundreds | Tens | Ones |
+					|--------|:---------:|:--------:|:----:|:----:|
+					| h1| | | | 1 |
+					| .yolo | | | 1 | 0 |
+					| #yolo | | 1 | 0 | 0 |
+					| style= | 1 | 0 | 0 | 0 |
+					</textarea>
+				</section>
+				<section data-markdown>
+					<textarea data-template>
+						## Quiz Time
+						* `#btn` = <span class="fragment fade-in " data-fragment-index="1 "> 100</span>
+						* `.nav` = <span class="fragment fade-in " data-fragment-index="2 "> 010</span>
+						* `div` = <span class="fragment fade-in " data-fragment-index="3 "> 001</span>
+						* `#btn.red` = <span class="fragment fade-in " data-fragment-index="4 "> 110</span>
+						* `div[data-col=2].article::before` = <span class="fragment fade-in " data-fragment-index="5 "> 022</span>
+					</textarea>
+				</section>
+				<section data-markdown>
+					<textarea data-template>
+						## A more realistic quiz
+						```HTML
+						<div class="box">
+							<ul id="item-list">
+								<li class="item highlight">The List Item</li>
+							</ul>
+						</div>
+						```
+						```CSS
+						.box li {
+							color: green;
+						}
+						li.highlight {
+							color: red;
+							font-weight: bold;
+						}
+						ul#item-list > li.item {
+							color: purple;
+						}
+						li.item {
+							font-weight: normal;
+						}
+						```
+						<a href="https://codepen.io/jamcgrath/pen/bxdPdp" target="_blank" >
+							<span style="font-size: .5em">Answer @ Codepen</span>
+						</a>
+
+					</textarea>
+				</section>
+				<section data-markdown>
+					<textarea data-template>
+						## Source Order
+						If multiple competing selectors have the same importance & specificity, source order will determine the winner
+					</textarea>
+				</section>
+				<section data-markdown>
+					<textarea data-template>
+							## Source Order is...timing!
+							* The style that is applied to the element(s) depends on where it is in the CSS (Author).
+							* Later styles override earlier styles
+
+							```CSS
+							p {
+								color: red;
+							}
+
+							p { /* applied because it is later */
+								color: orange
+							}
+							```
+					</textarea>
+				</section>
+				<section data-markdown>
+					<textarea data-template>
+							## More Like Sources Order!
+							There are often multiple sources in a webpage
+							* <span class="fragment fade-in " data-fragment-index="1 ">Inline styles</span>
+							* <span class="fragment fade-in " data-fragment-index="2 ">Embedded styles</span>
+							* <span class="fragment fade-in " data-fragment-index="3 ">External Style Sheets</span>
+							* <span class="fragment fade-in " data-fragment-index="4 ">Styles from plugins, frameworks, CDN</span>
+							* <span class="fragment fade-in " data-fragment-index="5 ">Styles injected from JS</span>
+							* <span class="fragment fade-in " data-fragment-index="6 ">!important</span>
+					</textarea>
+				</section>
+				<section>
+					<h2>Source Order Simplified</h2>
+					<span class="fragment fade-in " data-fragment-index="4 " style="color: red;">!important > </span>
+					<span class="fragment fade-in " data-fragment-index="3 "> Inline > </span>
+					<span class="fragment fade-in " data-fragment-index="2 "> Embedded > </span>
+					<span class="fragment fade-in " data-fragment-index="1 "> External*</span>
+
+					<ul style="margin-top: 50px">
+						<li class="fragment fade-in " data-fragment-index="4 ">!important overrides no matter where it is located </li>
+						<li class="fragment fade-in " data-fragment-index="4 ">External Style sheets depend on the order they are downloaded</li>
+					</ul>
+
+				</section>
+			</section>
+			<section>
+				<section data-markdown>
+					<textarea data-template>
+						## Inheritance
+						Aww yeah! I'm Rich!!!
+					</textarea>
+				</section>
+				<section data-markdown>
+					<textarea data-template>
+						## A gift to descendents
+						Some property values applied to an element can be passed down to it's descendents
+
+						<a href="http://codepen.io/jamcgrath/pen/dqYzav" target="_blank">CSS Inheritance @ codepen</a>
+					</textarea>
+				</section>
+				<section data-markdown>
+					<textarea data-template>
+						## 4/2 ways to control Inheritance
+						* <span class="fragment fade-in " data-fragment-index="1 ">inherit =</span><span class="fragment fade-in " data-fragment-index="2 "> same as parent element</span>
+						* <span class="fragment fade-in " data-fragment-index="1 ">initial =</span><span class="fragment fade-in " data-fragment-index="3 "> resets to the UA styles, if none then inherit</span>
+						* <span class="fragment fade-in " data-fragment-index="1 ">unset =</span><span class="fragment fade-in " data-fragment-index="4 "> resets to natural value. inherit or initial</span>
+						* <span class="fragment fade-in " data-fragment-index="1 ">revert =</span><span class="fragment fade-in " data-fragment-index="5 "> reverts to user styles if available or UA styles</span>
+						* <span class="fragment fade-in " data-fragment-index="6 "><i>initial and unset are not supported in IE</i></span>
+
+						<a href="https://codepen.io/jamcgrath/pen/QVjomp" target="_blank">example @ codepen</a>
+					</textarea>
+				</section>
+			</section>
+			<section>
+				<section data-markdown>
+					<textarea data-template>
+						## Box Model
+						Everything is a box
+
+					</textarea>
+				</section>
+				<section data-markdown class="box-model">
+					<textarea data-template>
+						## Standard Box Model
+
+						* Browsers layout every element as a box
+						* Each box has 4 parts
+
+
+						1. Content Area
+						2. Padding
+						3. Border
+						4. Margin
+
+						<a href="https://codepen.io/jamcgrath/full/bxVyEQ/" target="_blank">box model diagram @ codepen</a>
+					</textarea>
+				</section>
+				<section data-markdown>
+					<textarea data-template>
+						## Collapsing Margins
+						> In CSS, the adjoining margins of two or more boxes (which might or might not be siblings) can combine to form a single margin. Margins that combine this way are said to collapse, and the resulting combined margin is called a collapsed margin.
+
+						[W3 Specification](https://www.w3.org/TR/CSS22/box.html)
+					</textarea>
+				</section>
+				<section>
+					<aside class="notes" data-markdown>
+						<textarea data-template>
+								see H1 & Div in code pen example
+							</textarea>
+					</aside>
+					<div data-markdown>
+						<textarea data-template>
+							## Margins Collapse When...
+							If 2 vertical adjacent elements margin areas are touching (bottom / top) the larger value is used.
+							If one value is negative the values will be added
+
+							```CSS
+							div.el-a { margin-bottom: 50px; }
+							div.el-b { margin: 25px; } /* top margin collapses */
+							div.el-c { margin-top: -15px; }
+							```
+							div.el-b top margin = 0, bottom margin = 10 ( -15 + 25 )
+						</textarea>
+					</div>
+				</section>
+				<section>
+					<aside class="notes" data-markdown>
+						<textarea data-template>
+									see code pen example
+								</textarea>
+					</aside>
+					<div data-markdown>
+						<textarea data-template>
+							## And Margins Collapse When...
+							Nested elements whose margins touch and have no padding or border
+							```HTML
+							<h1>Title</h1>
+							<div>
+								<p>Paragraph Content</p>
+							</div>
+							```
+							```CSS
+								h1 {margin: 0}
+								div {top-margin: 50px}
+								p { top-margin: 20px} /* collapses to 0 */
+							```
+						</textarea>
+					</div>
+				</section>
+				<section data-markdown>
+					<textarea data-template>
+						## Un-collapse The Margins by...
+						* 	Add padding or a border to the element
+						* Or even better just use only margin-bottom and margin-left for spacing things
+					</textarea>
+				</section>
+			</section>
+			</text>
+		</div>
+
+		<script src=" lib/js/head.min.js "></script>
+		<script src="js/reveal.js "></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function () { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+		</script>
+
+</body>
+
+</html>
